@@ -269,7 +269,7 @@ app.get('/api/payments', auth('admin'), async (req,res) => {
 });
 
 // Admin: technicians list + details
-app.get('', auth('admin'), async (req,res) => {
+app.get('/api/technicians', auth('admin'), async (req,res) => {
   try {
     const techs = await Technician.find().sort({createdAt:-1});
     res.json({ items: techs });
@@ -330,7 +330,7 @@ app.delete('/api/calls/:id', auth('admin'), async (req,res)=>{
 app.delete('/api/payments/:id', auth('admin'), async (req,res)=>{
   try { await Payment.findByIdAndDelete(req.params.id); res.json({success:true}); }
   catch(e){ console.error('delete payment error', e); res.status(500).json({error:'Delete failed'}); }
-});/api/technicians
+});
 
 // Health
 app.get('/api/health', (req,res)=>res.json({ok:true}));
@@ -357,12 +357,8 @@ dbConnect(process.env.MONGO_URI)
     console.error('❌ DB connection failed:', err && err.message ? err.message : err);
     process.exit(1);
   });
-  app.get("/", (req, res) => {
-  res.send("✅ API is running successfully on Render!");
-});
-
-
-app.get("/test-db", async (req, res) => {
+  
+  app.get("/test-db", async (req, res) => {
   try {
     const mongooseState = mongoose.connection.readyState;
     // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
