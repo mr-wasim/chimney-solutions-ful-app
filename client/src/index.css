@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input, select, button, textarea { @apply rounded-xl border border-gray-200 px-3 py-2; }
+.card { @apply bg-white rounded-2xl shadow-md p-4; }
+.badge { @apply inline-flex items-center px-2 py-1 text-xs rounded-full; }
+.badge-red { @apply badge bg-red-100 text-red-600; }
+.badge-green { @apply badge bg-green-100 text-green-600; }
+.link { @apply text-blue-600 hover:underline; }
