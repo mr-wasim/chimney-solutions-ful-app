@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useAuth } from './store/auth'
 
-export const API_BASE = import.meta.env.VITE_API_BASE || '/api'
+export const API_BASE = import.meta.env.VITE_API_BASE || 'https://chimney-solutions-ful-app.onrender.com/api'
 
 export const api = axios.create({ baseURL: API_BASE })
 
