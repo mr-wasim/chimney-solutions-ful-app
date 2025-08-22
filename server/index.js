@@ -357,6 +357,9 @@ dbConnect(process.env.MONGO_URI)
     console.error('❌ DB connection failed:', err && err.message ? err.message : err);
     process.exit(1);
   });
+  app.get("/", (req, res) => {
+  res.send("✅ API is running successfully on Render!");
+});
 
 // Vercel / other usage: export app
 module.exports = app;
