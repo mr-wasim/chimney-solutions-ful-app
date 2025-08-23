@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { api } from '../api'
-import { useAuth } from '../store/auth'
+import { useAuth } from '../store/auth.jsx'
 import toast from 'react-hot-toast'
 import Loader from '../components/Loader'   // 👈 loader import
 
