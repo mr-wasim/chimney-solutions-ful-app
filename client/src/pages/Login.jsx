@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { api } from '../api.js'
-import { useAuth } from '../store/auth.jsx'
+import { api } from '../api'
+import { useAuth } from '../store/auth'
 import toast from 'react-hot-toast'
-import Loader from '../components/Loader'   // 👈 loader import
 
 export default function Login(){
   const [mode, setMode] = useState('technician')  // admin | technician
@@ -13,56 +12,38 @@ export default function Login(){
   const [reg, setReg] = useState({ name:'', phone:'', password:'' })
   const { login } = useAuth()
 
-  const [loading, setLoading] = useState(false)   // 👈 loading state
-
   const submitAdmin = async(e)=>{
     e.preventDefault()
-    setLoading(true)   // 👈 loader start
     try{
       const { data } = await api.post('/admin/login', admin)
       login(data.token, 'admin', data.admin)
       toast.success('Admin login successful')
       window.location.href='/admin'
-    }catch(err){ 
-      toast.error(err?.response?.data?.error || 'Login failed') 
-    }finally{
-      setLoading(false)   // 👈 loader end
-    }
+    }catch(err){ toast.error(err?.response?.data?.error || 'Login failed') }
   }
 
   const submitTechLogin = async(e)=>{
     e.preventDefault()
-    setLoading(true)
     try{
       const { data } = await api.post('/technicians/login', tech)
       login(data.token, 'technician', data.technician)
       toast.success('Technician login successful')
       window.location.href='/tech'
-    }catch(err){ 
-      toast.error(err?.response?.data?.error || 'Login failed') 
-    }finally{
-      setLoading(false)
-    }
+    }catch(err){ toast.error(err?.response?.data?.error || 'Login failed') }
   }
 
   const submitTechRegister = async(e)=>{
     e.preventDefault()
-    setLoading(true)
     try{
       const { data } = await api.post('/technicians/register', reg)
       login(data.token, 'technician', data.technician)
       toast.success('Technician registered')
       window.location.href='/tech'
-    }catch(err){ 
-      toast.error(err?.response?.data?.error || 'Register failed') 
-    }finally{
-      setLoading(false)
-    }
+    }catch(err){ toast.error(err?.response?.data?.error || 'Register failed') }
   }
 
   return (
     <div className="min-h-screen grid place-items-center p-6 bg-gray-50">
-      {loading && <Loader />}   {/* 👈 loader yaha laga diya */}
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6">
         <h1 className="text-2xl font-bold text-center mb-6">Chimney Solutions — CRM</h1>
 
